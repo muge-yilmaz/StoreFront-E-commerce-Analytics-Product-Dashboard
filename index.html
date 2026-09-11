@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StoreFront - E-commerce Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="flex h-screen bg-gray-50 text-gray-900">
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+      <header class="p-6 flex items-center gap-3">
+        <a
+          href="#"
+          class="w-10 h-10 bg-indigo-500 rounded-xl hover:bg-indigo-600 shadow-md hover:shadow-lg flex items-center justify-center text-white font-bold text-xl"
+        >
+          S
+        </a>
+        <a href="#" class="text-xl font-bold">StoreFront</a>
+      </header>
+
+      <nav class="flex-1 p-4">
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="#"
+              id="nav-dashboard"
+              class="w-full flex items-center gap-3 text-left p-3 rounded-xl hover:bg-indigo-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m0 0H5a2 2 0 01-2-2v-5m14 7a2 2 0 002-2v-5m0 0l2 2"
+                />
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              id="nav-products"
+              class="w-full flex items-center gap-3 text-left p-3 rounded-xl hover:bg-indigo-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                />
+              </svg>
+              Products
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              id="nav-categories"
+              class="w-full flex items-center gap-3 text-left p-3 rounded-xl hover:bg-indigo-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+              Categories
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              id="nav-favorites"
+              class="w-full flex items-center gap-3 text-left p-3 rounded-xl hover:bg-indigo-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318 1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              Favorites
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="p-4 border-t border-gray-200">
+        <button
+          id="auth-button"
+          onclick="handleAuthAction()"
+          class="w-full flex items-center gap-3 text-left p-3 rounded-xl hover:bg-indigo-200"
+        >
+          <span id="auth-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              />
+            </svg>
+          </span>
+          <span id="auth-text">Login / Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-gray-50 overflow-y-auto">
+      <section
+        class="h-16 bg-white border-b border-gray-100 flex items-center justify-between p-8 sticky top-0 z-20"
+      >
+        <div class="relative w-64">
+          <svg
+            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search products..."
+            class="w-full bg-gray-50 border border-gray-200 rounded-2xl py-2.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"
+          />
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a
+            href="cart.html"
+            class="relative w-10 h-10 flex items-center justify-center text-gray-500 hover:text-indigo-600 transition"
+          >
+            <svg
+              class="w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.119-1.243l1.263-12c.078-.732.693-1.282 1.426-1.282h11.777c.733 0 1.348.55 1.426 1.282Z"
+              />
+            </svg>
+
+            <span
+              id="cart-count"
+              class="absolute -top-1 -right-1 bg-indigo-500 text-white text-xs font-medium w-5 h-5 flex items-center justify-center rounded-full shadow-sm hover:bg-indigo-600 hover:shadow-lg transition duration-300"
+            >
+              0
+            </span>
+          </a>
+
+          <button class="text-gray-500 hover:text-indigo-600 transition">
+            <div class="flex items-center">
+              <span
+                class="inline-block w-2 h-2 bg-indigo-500 rounded-full animate-pulse mr-1"
+              ></span>
+              <svg
+                class="w-6 h-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                />
+              </svg>
+            </div>
+          </button>
+          <button
+            id="user-avatar"
+            title="Click to Logout"
+            onclick="handleAuthAction()"
+            class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold hover:bg-indigo-600 transition"
+          >
+            ??
+          </button>
+
+          <div class="flex items-center gap-4 border-l border-gray-200 pl-4">
+            <div class="flex flex-col text-right">
+              <span
+                class="text-sm font-medium text-gray-900 leading-tight user-name-display"
+                >John Doe</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-8 py-4" id="main-content">
+        <div class="grid grid-cols-4 gap-6">
+          <div
+            class="bg-white p-6 rounded-3xl shadow-sm border border-gray-200 flex items-center gap-4 hover:shadow-lg transition duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center"
+            >
+              <svg
+                class="w-7 h-7"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+                />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-400">Total Products</p>
+              <p class="text-2xl font-black text-gray-900" id="stat-products">
+                1,284
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-3xl shadow-sm border border-gray-200 flex items-center gap-4 hover:shadow-lg transition duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center"
+            >
+              <svg
+                class="w-7 h-7"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v12m-3-2.818.879.659c1.546 1.159 3.696 1.159 5.242 0l.879-.659m-7-5.204.879.659c1.546 1.159 3.696 1.159 5.242 0l.879-.659m-7-5.204.879.659c1.546 1.159 3.696 1.159 5.242 0l.879-.659M9.75 21c4.5 0 8.25-3.75 8.25-8.25V4.5L12 3 5.25 4.5V12.75C5.25 17.25 9 21 9.75 21Z"
+                />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-400">Revenue</p>
+              <p class="text-2xl font-black text-gray-900" id="stat-revenue">
+                $48,290
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-3xl shadow-sm border border-gray-200 flex items-center gap-4 hover:shadow-lg transition duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center"
+            >
+              <svg
+                class="w-7 h-7"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-400">Favorites</p>
+              <p class="text-2xl font-black text-gray-900" id="stat-favorites">
+                326
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-3xl shadow-sm border border-gray-200 flex items-center gap-4 hover:shadow-lg transition duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center"
+            >
+              <svg
+                class="w-7 h-7"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 18 9 11.25l4.306 4.307L19.5 7.125M2.25 18.75h19.5"
+                />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-400">Cart Value</p>
+              <p class="text-2xl font-black text-gray-900" id="stat-cart-value">
+                $0.00
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-8 py-4" id="products-section">
+        <div class="flex items-end justify-between mb-6">
+          <div class="flex flex-col gap-1">
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
+              Products
+            </h1>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="relative group">
+              <button
+                id="filter-btn"
+                class="flex items-center gap-2 text-xs text-gray-500 hover:text-gray-900 transition"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.5 6h9.75M10.5 12h9.75M10.5 18h9.75M3 6h3m-3 6h3m-3 18h3"
+                  />
+                </svg>
+                <span>All</span>
+                <svg
+                  class="w-4 h-4 text-gray-400 group-hover:rotate-180 transition duration-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </button>
+
+              <div
+                id="filter-menu"
+                class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50"
+              >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Beauty</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Fragrances</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Furniture</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Groceries</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Home Decoration</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Kitchen Accessories</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Laptops</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Mens Shirts</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Mens Shoes</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Mens Watches</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Mobile Accessories</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 font-medium"
+                  >Motorcycle</a
+                >
+              </div>
+            </div>
+
+            <button
+              class="p-2.5 bg-gray-50 text-gray-400 rounded-xl hover:bg-indigo-200 hover:text-indigo-600 transition"
+            >
+              <svg
+                class="w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-4 gap-6 mb-5">
+          <!-- Product cards will be injected here by JavaScript -->
+        </div>
+        <footer class="mt-8 p-6 border-t border-gray-200">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4"
+          >
+            <div class="flex flex-col gap-1">
+              <a href="/" class="text-xl font-bold">StoreFront</a>
+              <p class="text-xs text-gray-400">
+                © 2026 All Rights Reserved. Designed by mugeylmz.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-6">
+              <a
+                href="#"
+                class="text-xs font-semibold text-gray-400 hover:text-indigo-600 transition duration-300"
+                >Privacy Policy</a
+              >
+              <a
+                href="#"
+                class="text-xs font-semibold text-gray-400 hover:text-indigo-600 transition duration-300"
+                >Terms of Service</a
+              >
+              <a
+                href="#"
+                class="text-xs font-semibold text-gray-400 hover:text-indigo-600 transition duration-300"
+                >Support</a
+              >
+            </div>
+
+            <div class="flex flex-col items-center md:items-end gap-2">
+              <span class="text-sm font-semibold text-gray-400 tracking-wide"
+                >Follow Us:</span
+              >
+              <div class="flex items-center gap-3">
+                <a
+                  href="https://linkedin.com/in/"
+                  target="_blank"
+                  class="p-2 bg-gray-100 text-gray-500 rounded-lg hover:bg-indigo-200 hover:text-indigo-700 transition duration-300 shadow-sm"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                    />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://instagram.com/"
+                  target="_blank"
+                  class="p-2 bg-gray-100 text-gray-500 rounded-lg hover:bg-rose-200 hover:text-rose-700 transition duration-300 shadow-sm"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect
+                      x="2"
+                      y="2"
+                      width="20"
+                      height="20"
+                      rx="5"
+                      ry="5"
+                    ></rect>
+                    <path
+                      d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                    ></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+
+                <a
+                  href="https://github.com/"
+                  target="_blank"
+                  class="p-2 bg-gray-100 text-gray-500 rounded-lg hover:bg-gray-500 hover:text-white transition duration-300 shadow-sm"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </body>
+
+  <script src="./script.js"></script>
+</html>
